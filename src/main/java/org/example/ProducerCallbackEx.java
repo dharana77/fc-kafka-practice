@@ -5,10 +5,12 @@ import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.clients.producer.RoundRobinPartitioner;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.plaf.ProgressBarUI;
 import java.util.Properties;
 
 public class ProducerCallbackEx {
@@ -34,7 +36,6 @@ public class ProducerCallbackEx {
 
         // create the Producer
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
-
 
         for (int j=0; j<10; j++){
 
@@ -68,9 +69,7 @@ public class ProducerCallbackEx {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
-
 
         // tell the producer to send all data and block until done -- synchronous
         producer.flush();
